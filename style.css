@@ -1,0 +1,20 @@
+.donut-timer {
+    position: relative;
+    display: inline-block;
+}
+
+#donut-image {
+    width: 200px;  /* Adjust as needed */
+    height: auto;
+    border-radius: 50%; /* Makes it look more like a donut */
+}
+
+#timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
