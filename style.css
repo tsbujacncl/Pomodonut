@@ -3,10 +3,22 @@
     display: inline-block;
 }
 
+.donut-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px; /* Adjust size for the hole */
+    height: 240px;
+    background-color: #f8e5c0; /* Match background */
+    border-radius: 50%;
+    z-index: 2; /* Ensures it stays above the donut */
+}
+
 #donut-image {
-    width: 200px;  /* Adjust as needed */
+    width: 600px;  /* Increased size */
     height: auto;
-    border-radius: 50%; /* Makes it look more like a donut */
+    border-radius: 50%;
 }
 
 #timer-text {
@@ -14,7 +26,29 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     color: black;
+    z-index: 3; /* Keeps text above the hole */
+}
+
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f8e5c0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures all content is centred */
+    justify-content: center;
+    padding: 20px;
+    background: #f8e5c0;
+    border-radius: 10px;
 }
