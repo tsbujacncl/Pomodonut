@@ -1,33 +1,50 @@
 let timer;
-let timeLeft = 25 * 60;
+let timeLeft = 25 * 60; // 25 minutes in seconds
+let coffeeTimeLeft = 5 * 60; // 5 minutes in seconds
 let isRunning = false;
+let isCoffeeMode = false;
+
 const timerText = document.getElementById("timer-text");
-const progressCircle = document.getElementById("progress-circle");
+const donutImage = document.getElementById("donut-image");
+
 const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
 const resetButton = document.getElementById("reset");
 
-function updateDisplay() {
+function updateTimerDisplay() {
     let minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
-    timerText.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
 
-    // Update donut stroke (progress effect)
-    let progress = (timeLeft / (25 * 60)) * 251;
-    progressCircle.style.strokeDashoffset = progress;
+function updateCoffeeTimerDisplay() {
+    let minutes = Math.floor(coffeeTimeLeft / 60);
+    let seconds = coffeeTimeLeft % 60;
+    timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
 function startTimer() {
     if (!isRunning) {
         isRunning = true;
         timer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateDisplay();
+            if (!isCoffeeMode) {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timer);
+                    isRunning = false;
+                    switchToCoffeeBreak();
+                }
             } else {
-                clearInterval(timer);
-                isRunning = false;
-                alert("Time's up!");
+                if (coffeeTimeLeft > 0) {
+                    coffeeTimeLeft--;
+                    updateCoffeeTimerDisplay();
+                } else {
+                    clearInterval(timer);
+                    isRunning = false;
+                    switchToPomodoro();
+                }
             }
         }, 1000);
     }
@@ -41,13 +58,42 @@ function pauseTimer() {
 function resetTimer() {
     clearInterval(timer);
     isRunning = false;
+    isCoffeeMode = false;
     timeLeft = 25 * 60;
-    updateDisplay();
+    coffeeTimeLeft = 5 * 60;
+    donutImage.src = "assets/donut.jpg"; // Reset to donut image
+    updateTimerDisplay();
 }
 
-// Event listeners
+function switchToCoffeeBreak() {
+    isCoffeeMode = true;
+    coffeeTimeLeft = 5 * 60;
+
+    // Change the image to the coffee mug
+    donutImage.src = "assets/coffee-mug.png";
+
+    // Hide the donut hole when switching to coffee mode
+    document.querySelector(".donut-hole").style.display = "none";
+
+    updateCoffeeTimerDisplay();
+    startTimer();
+}
+
+function switchToPomodoro() {
+    isCoffeeMode = false;
+    timeLeft = 25 * 60;
+
+    // Switch back to the donut image
+    donutImage.src = "assets/donut.jpg";
+
+    // Show the donut hole again
+    document.querySelector(".donut-hole").style.display = "block";
+
+    updateTimerDisplay();
+}
+
 startButton.addEventListener("click", startTimer);
 pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 
-updateDisplay();
+updateTimerDisplay();
