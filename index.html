@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodonut Timer</title>
+    <title>🍩 Pomodonut Timer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/donut.png">
 </head>
 <body>
     <div class="container">
         <h1>Pomodonut Timer</h1>
 
+        <!-- Settings Button -->
+        <button id="settings-button" class="icon-button">⚙️</button>
+
+        <!-- Mode Switch Buttons -->
+        <div class="mode-switch">
+            <button id="pomodoro-mode">🍩 Pomodoro</button>
+            <button id="break-mode">☕ Break</button>
+        </div>
+
         <!-- Donut Timer -->
         <div class="donut-timer">
             <svg class="donut-svg" width="300" height="300">
                 <defs>
-                    <!-- Donut Image Pattern -->
                     <pattern id="donut-pattern" patternUnits="userSpaceOnUse" width="300" height="300">
                         <image id="timer-image" href="assets/donut.png" width="300" height="300"></image>
-                    </pattern>
-
-                    <!-- Coffee Mug Image Pattern -->
-                    <pattern id="coffee-pattern" patternUnits="userSpaceOnUse" width="450" height="450">
-                        <image id="coffee-image" href="assets/coffee-mug.png" width="450" height="450" x="-75" y="-75"
-                            transform="rotate(0 225 225)"></image>
                     </pattern>
                 </defs>
 
                 <!-- Circular wipe effect -->
-                <circle id="donut-display" cx="150" cy="150" r="140" fill="url(#donut-pattern)" stroke="#f8e5c0" stroke-width="300"
-                    stroke-dasharray="880" stroke-dashoffset="880" transform="rotate(0 150 150)"></circle>
+                <circle id="donut-display" cx="150" cy="150" r="140" fill="url(#donut-pattern)" stroke="#f8e5c0"
+                        stroke-width="300" stroke-dasharray="880" stroke-dashoffset="880" 
+                        transform="rotate(0 150 150)">
+                </circle>
             </svg>
 
             <!-- Timer Countdown Text -->
@@ -40,17 +45,60 @@
             <button id="start">Start</button>
             <button id="reset">Reset</button>
         </div>
+    </div>
 
-        <!-- Timer Length Inputs -->
-        <div class="time-settings">
-            <label>Pomodoro Time: 
-                <input type="number" id="pomodoro-minutes" value="25" min="0"> min
-                <input type="number" id="pomodoro-seconds" value="0" min="0" max="59"> sec
-            </label>
-            <label>Break Time: 
-                <input type="number" id="break-minutes" value="5" min="0"> min
-                <input type="number" id="break-seconds" value="0" min="0" max="59"> sec
-            </label>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Settings</h2>
+
+            <form id="settings-form">
+                <!-- Timer Length Inputs -->
+                <fieldset>
+                    <legend>Timer Length</legend>
+                    <label>Pomodoro: 
+                        <input type="number" id="pomodoro-minutes" value="25" min="0"> min
+                        <input type="number" id="pomodoro-seconds" value="0" min="0" max="59"> sec
+                    </label>
+                    <label>Break: 
+                        <input type="number" id="break-minutes" value="5" min="0"> min
+                        <input type="number" id="break-seconds" value="0" min="0" max="59"> sec
+                    </label>
+                </fieldset>
+
+                <!-- Auto Start Options -->
+                <fieldset>
+                    <legend>Auto Start</legend>
+                    <label><input type="checkbox" id="auto-start-breaks"> Auto Start Breaks</label>
+                    <label><input type="checkbox" id="auto-start-pomodoros"> Auto Start Pomodoros</label>
+                </fieldset>
+
+                <!-- Pomodoros Left Counter -->
+                <fieldset>
+                    <legend>Session Settings</legend>
+                    <label>Pomodoros Left: 
+                        <input type="number" id="pomodoros-left" value="4" min="1">
+                    </label>
+                </fieldset>
+
+                <!-- Alarm Settings -->
+                <fieldset>
+                    <legend>Alarm Settings</legend>
+                    <label>Sound: 
+                        <select id="alarm-sound">
+                            <option value="beep">Beep</option>
+                            <option value="chime">Chime</option>
+                            <option value="bell">Bell</option>
+                        </select>
+                    </label>
+                    <label>Volume: 
+                        <input type="range" id="alarm-volume" min="0" max="100" value="50">
+                    </label>
+                </fieldset>
+
+                <button id="save-settings" type="button">Save Settings</button>
+            </form>
         </div>
     </div>
 
