@@ -1,99 +1,97 @@
+// Timer variables
 let timer;
-let timeLeft = 25 * 60; // 25 minutes in seconds
-let coffeeTimeLeft = 5 * 60; // 5 minutes in seconds
+let pomodoroTime = 25 * 60; // 25 minutes in seconds
+let breakTime = 5 * 60; // 5 minutes in seconds
+let timeLeft = pomodoroTime;
 let isRunning = false;
-let isCoffeeMode = false;
+let isBreakMode = false;
 
+// DOM Elements
 const timerText = document.getElementById("timer-text");
 const donutImage = document.getElementById("donut-image");
-
 const startButton = document.getElementById("start");
-const pauseButton = document.getElementById("pause");
 const resetButton = document.getElementById("reset");
+const donutHole = document.querySelector(".donut-hole");
 
-function updateTimerDisplay() {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
+// Update timer display function
+function updateTimerDisplay(time) {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
     timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
-function updateCoffeeTimerDisplay() {
-    let minutes = Math.floor(coffeeTimeLeft / 60);
-    let seconds = coffeeTimeLeft % 60;
-    timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-}
-
-function startTimer() {
-    if (!isRunning) {
-        isRunning = true;
+// Start/Pause timer function
+function toggleTimer() {
+    if (isRunning) {
+        clearInterval(timer);
+        startButton.textContent = "Start";
+    } else {
         timer = setInterval(() => {
-            if (!isCoffeeMode) {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateTimerDisplay();
-                } else {
-                    clearInterval(timer);
-                    isRunning = false;
-                    switchToCoffeeBreak();
-                }
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay(timeLeft);
             } else {
-                if (coffeeTimeLeft > 0) {
-                    coffeeTimeLeft--;
-                    updateCoffeeTimerDisplay();
-                } else {
-                    clearInterval(timer);
-                    isRunning = false;
-                    switchToPomodoro();
-                }
+                clearInterval(timer);
+                isRunning = false;
+                startButton.textContent = "Start";
+                isBreakMode ? switchToPomodoro() : switchToBreak();
             }
         }, 1000);
+        startButton.textContent = "Pause";
     }
+    isRunning = !isRunning;
 }
 
-function pauseTimer() {
-    clearInterval(timer);
-    isRunning = false;
-}
-
+// Reset timer function
 function resetTimer() {
     clearInterval(timer);
     isRunning = false;
-    isCoffeeMode = false;
-    timeLeft = 25 * 60;
-    coffeeTimeLeft = 5 * 60;
-    donutImage.src = "assets/donut.jpg"; // Reset to donut image
-    updateTimerDisplay();
+    isBreakMode = false;
+    timeLeft = pomodoroTime;
+    resetDonutImage();
+    updateTimerDisplay(timeLeft);
+    startButton.textContent = "Start"; // Ensure button resets to "Start"
 }
 
-function switchToCoffeeBreak() {
-    isCoffeeMode = true;
-    coffeeTimeLeft = 5 * 60;
-
-    // Change the image to the coffee mug
-    donutImage.src = "assets/coffee-mug.png";
-
-    // Hide the donut hole when switching to coffee mode
-    document.querySelector(".donut-hole").style.display = "none";
-
-    updateCoffeeTimerDisplay();
-    startTimer();
+// Switch to break mode
+function switchToBreak() {
+    isBreakMode = true;
+    timeLeft = breakTime;
+    changeImage("assets/coffee-mug.png");
+    hideDonutHole();
+    updateTimerDisplay(timeLeft);
+    toggleTimer();
 }
 
+// Switch back to pomodoro mode
 function switchToPomodoro() {
-    isCoffeeMode = false;
-    timeLeft = 25 * 60;
-
-    // Switch back to the donut image
-    donutImage.src = "assets/donut.jpg";
-
-    // Show the donut hole again
-    document.querySelector(".donut-hole").style.display = "block";
-
-    updateTimerDisplay();
+    isBreakMode = false;
+    timeLeft = pomodoroTime;
+    resetDonutImage();
+    showDonutHole();
+    updateTimerDisplay(timeLeft);
 }
 
-startButton.addEventListener("click", startTimer);
-pauseButton.addEventListener("click", pauseTimer);
+// Image handling functions
+function changeImage(src) {
+    donutImage.src = src;
+}
+
+function resetDonutImage() {
+    donutImage.src = "assets/donut.jpg";
+}
+
+function hideDonutHole() {
+    if (donutHole) donutHole.style.display = "none";
+}
+
+function showDonutHole() {
+    if (donutHole) donutHole.style.display = "block";
+}
+
+// Event listeners
+startButton.addEventListener("click", toggleTimer);
 resetButton.addEventListener("click", resetTimer);
 
-updateTimerDisplay();
+// Initialize timer display
+updateTimerDisplay(timeLeft);
