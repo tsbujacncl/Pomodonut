@@ -11,7 +11,6 @@ const timerText = document.getElementById("timer-text");
 const donutImage = document.getElementById("donut-image");
 const startButton = document.getElementById("start");
 const resetButton = document.getElementById("reset");
-const donutHole = document.querySelector(".donut-hole");
 
 // Update timer display function
 function updateTimerDisplay(time) {
@@ -57,8 +56,7 @@ function resetTimer() {
 function switchToBreak() {
     isBreakMode = true;
     timeLeft = breakTime;
-    changeImage("assets/coffee-mug.png");
-    hideDonutHole();
+    changeImage("assets/coffee-mug.jpg");
     updateTimerDisplay(timeLeft);
     toggleTimer();
 }
@@ -68,7 +66,6 @@ function switchToPomodoro() {
     isBreakMode = false;
     timeLeft = pomodoroTime;
     resetDonutImage();
-    showDonutHole();
     updateTimerDisplay(timeLeft);
 }
 
@@ -78,15 +75,7 @@ function changeImage(src) {
 }
 
 function resetDonutImage() {
-    donutImage.src = "assets/donut.jpg";
-}
-
-function hideDonutHole() {
-    if (donutHole) donutHole.style.display = "none";
-}
-
-function showDonutHole() {
-    if (donutHole) donutHole.style.display = "block";
+    donutImage.src = "assets/donut.png"; // Updated to use donut.png
 }
 
 // Event listeners
