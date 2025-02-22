@@ -22,20 +22,20 @@
 
         <!-- Donut Timer -->
         <div class="donut-timer">
-            <svg class="donut-svg" width="300" height="300">
+            <svg class="donut-svg" width="700" height="700">
                 <defs>
-                    <pattern id="donut-pattern" patternUnits="userSpaceOnUse" width="300" height="300">
-                        <image id="timer-image" href="assets/donut.png" width="300" height="300"></image>
+                    <pattern id="donut-pattern" patternUnits="userSpaceOnUse" width="700" height="700">
+                        <image id="timer-image" href="assets/donut.png" width="700" height="700"></image>
                     </pattern>
                 </defs>
-
+        
                 <!-- Circular wipe effect -->
-                <circle id="donut-display" cx="150" cy="150" r="140" fill="url(#donut-pattern)" stroke="#f8e5c0"
-                        stroke-width="300" stroke-dasharray="880" stroke-dashoffset="880" 
-                        transform="rotate(0 150 150)">
+                <circle id="donut-display" cx="350" cy="350" r="340" fill="url(#donut-pattern)" stroke="#f8e5c0"
+                        stroke-width="700" stroke-dasharray="2130" stroke-dashoffset="2130" 
+                        transform="rotate(0 350 350)">
                 </circle>
             </svg>
-
+        
             <!-- Timer Countdown Text -->
             <span id="timer-text">25:00</span>
         </div>
@@ -43,7 +43,9 @@
         <!-- Timer Controls -->
         <div class="controls">
             <button id="start">Start</button>
-            <button id="reset">Reset</button>
+            <button id="skip">
+                <img src="assets/skip-button.png" alt="Skip" width="40" height="40">
+            </button>
         </div>
     </div>
 

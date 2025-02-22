@@ -8,7 +8,7 @@ let pomodorosLeft = 4;
 // DOM Elements
 const timerText = document.getElementById("timer-text");
 const startButton = document.getElementById("start");
-const resetButton = document.getElementById("reset");
+const skipButton = document.getElementById("skip");
 const donutCircle = document.querySelector(".donut-svg circle");
 const timerImage = document.getElementById("timer-image");
 
@@ -34,7 +34,7 @@ const alarmSoundSelect = document.getElementById("alarm-sound");
 const alarmVolume = document.getElementById("alarm-volume");
 
 // Circular Animation Constants
-const radius = 140;
+const radius = 340;
 const circumference = 2 * Math.PI * radius;
 donutCircle.style.strokeDasharray = circumference;
 
@@ -78,16 +78,13 @@ function getBreakTime() {
 function updateTimerDisplay(time) {
     let minutes = Math.floor(time / 60000);
     let seconds = Math.floor((time % 60000) / 1000);
-    let milliseconds = Math.floor((time % 1000) / 10); // Get milliseconds for extra smoothness
-
-    // Update text with a smooth timer countdown
+    
     timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
+    
     // Update circular wipe animation
     let totalTime = isBreakMode ? getBreakTime() : getPomodoroTime();
     let progress = time / totalTime; // Calculate progress (1 → 0)
-
-    donutCircle.style.strokeDashoffset = circumference * progress; // Smoothly reduce stroke
+    donutCircle.style.strokeDashoffset = circumference * progress;
 }
 
 // Update Timer Image Based on Mode
@@ -102,6 +99,7 @@ function updateTimerImage() {
     }
 }
 
+// Start/Pause Timer
 function toggleTimer() {
     if (isRunning) {
         clearInterval(timer);
@@ -134,19 +132,20 @@ function toggleTimer() {
                     if (autoStartBreaks.checked) switchToBreak();
                 }
             }
-        }, 10); // Update every 10ms for a smooth experience
+        }, 10);
     }
 }
 
-// Reset Timer to Initial State
-function resetTimer() {
+// Skip to Next Mode (Pomodoro -> Break, Break -> Pomodoro)
+function skipToNextMode() {
     clearInterval(timer);
     isRunning = false;
-    isBreakMode = false;
-    timeLeft = getPomodoroTime();
-    updateTimerDisplay(timeLeft);
-    updateTimerImage();
-    startButton.textContent = "Start";
+
+    if (isBreakMode) {
+        switchToPomodoro();
+    } else {
+        switchToBreak();
+    }
 }
 
 // Switch to Pomodoro Mode
@@ -195,16 +194,42 @@ saveSettingsButton.addEventListener("click", () => {
 
 // Attach Event Listeners
 startButton.addEventListener("click", toggleTimer);
-resetButton.addEventListener("click", resetTimer);
+skipButton.addEventListener("click", skipToNextMode);
 pomodoroButton.addEventListener("click", switchToPomodoro);
 breakButton.addEventListener("click", switchToBreak);
-pomodoroMinutesInput.addEventListener("change", resetTimer);
-pomodoroSecondsInput.addEventListener("change", resetTimer);
-breakMinutesInput.addEventListener("change", resetTimer);
-breakSecondsInput.addEventListener("change", resetTimer);
+pomodoroMinutesInput.addEventListener("change", switchToPomodoro);
+pomodoroSecondsInput.addEventListener("change", switchToPomodoro);
+breakMinutesInput.addEventListener("change", switchToBreak);
+breakSecondsInput.addEventListener("change", switchToBreak);
 
 // Initialize Timer on Page Load
 document.addEventListener("DOMContentLoaded", () => {
     loadSettings();
-    resetTimer();
+    switchToPomodoro();
 });
+
+// Switch to Break Mode
+function switchToBreak() {
+    isBreakMode = true;
+    timeLeft = getBreakTime();
+    updateTimerDisplay(timeLeft);
+    updateTimerImage();
+    
+    document.body.classList.add("break-mode"); // Apply light blue to background
+    document.querySelector(".container").classList.add("break-mode"); // Apply lighter blue to container
+
+    if (autoStartBreaks.checked) toggleTimer();
+}
+
+// Switch to Pomodoro Mode
+function switchToPomodoro() {
+    isBreakMode = false;
+    timeLeft = getPomodoroTime();
+    updateTimerDisplay(timeLeft);
+    updateTimerImage();
+
+    document.body.classList.remove("break-mode"); // Revert background
+    document.querySelector(".container").classList.remove("break-mode"); // Revert container
+
+    if (autoStartPomodoros.checked) toggleTimer();
+}
