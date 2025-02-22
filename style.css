@@ -1,42 +1,68 @@
-.donut-timer {
-    position: relative;
-    display: inline-block;
-}
-
-#donut-image {
-    width: 600px;  /* Increased size */
-    height: auto;
-    border-radius: 50%;
-}
-
-#timer-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-    font-weight: bold;
-    color: black;
-    z-index: 3; /* Keeps text above the donut */
-}
-
+/* General Page Styles */
 body {
     text-align: center;
     font-family: Arial, sans-serif;
     background-color: #f8e5c0;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
+    justify-content: center;
+    align-items: center;
     margin: 0;
 }
 
+/* Timer Container */
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Ensures all content is centred */
-    justify-content: center;
+    align-items: center;
     padding: 20px;
     background: #f8e5c0;
     border-radius: 10px;
+}
+
+/* Donut Timer */
+.donut-timer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+}
+
+/* Donut SVG */
+.donut-svg {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transform: rotate(-90deg); /* Ensures wipe starts from 12 o’clock */
+}
+
+/* Timer Text */
+#timer-text {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    z-index: 3;
+}
+
+/* Control Buttons */
+.controls button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#start {
+    background-color: #ff6363;
+    color: white;
+}
+
+#reset {
+    background-color: #4caf50;
+    color: white;
 }

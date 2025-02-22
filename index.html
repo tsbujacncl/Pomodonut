@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Donut Timer</title>
+    <title>Pomodonut Timer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Pomodonut</h1>
+        <h1>Pomodonut Timer</h1>
+
+        <!-- Donut Timer -->
         <div class="donut-timer">
-            <!-- Donut Image (Replaced with PNG) -->
-            <img src="assets/donut.png" alt="Donut Timer" id="donut-image">
-            
-            <!-- Timer Text Overlay -->
+            <svg class="donut-svg" width="300" height="300">
+                <defs>
+                    <!-- Donut Image Pattern -->
+                    <pattern id="donut-pattern" patternUnits="userSpaceOnUse" width="300" height="300">
+                        <image id="timer-image" href="assets/donut.png" width="300" height="300"></image>
+                    </pattern>
+
+                    <!-- Coffee Mug Image Pattern -->
+                    <pattern id="coffee-pattern" patternUnits="userSpaceOnUse" width="450" height="450">
+                        <image id="coffee-image" href="assets/coffee-mug.png" width="450" height="450" x="-75" y="-75"
+                            transform="rotate(0 225 225)"></image>
+                    </pattern>
+                </defs>
+
+                <!-- Circular wipe effect -->
+                <circle id="donut-display" cx="150" cy="150" r="140" fill="url(#donut-pattern)" stroke="#f8e5c0" stroke-width="300"
+                    stroke-dasharray="880" stroke-dashoffset="880" transform="rotate(0 150 150)"></circle>
+            </svg>
+
+            <!-- Timer Countdown Text -->
             <span id="timer-text">25:00</span>
         </div>
 
-        <!-- Control Buttons -->
+        <!-- Timer Controls -->
         <div class="controls">
             <button id="start">Start</button>
             <button id="reset">Reset</button>
+        </div>
+
+        <!-- Timer Length Inputs -->
+        <div class="time-settings">
+            <label>Pomodoro Time: 
+                <input type="number" id="pomodoro-minutes" value="25" min="0"> min
+                <input type="number" id="pomodoro-seconds" value="0" min="0" max="59"> sec
+            </label>
+            <label>Break Time: 
+                <input type="number" id="break-minutes" value="5" min="0"> min
+                <input type="number" id="break-seconds" value="0" min="0" max="59"> sec
+            </label>
         </div>
     </div>
 
