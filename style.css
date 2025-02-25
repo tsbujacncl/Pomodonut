@@ -79,18 +79,23 @@ h1 {
     position: relative;
 }
 
-/* Start Button */
+/* Start Button - Match Mode Switch Buttons */
 #start {
-    background-color: #ff6363;
-    color: white;
-    font-size: 24px;
+    background: #ff4040; /* Light orange */
+    color: #730000;
+    font-size: 20px;
+    font-weight: bold;
     padding: 15px 30px;
     border: none;
+    border-radius: 30px;
     cursor: pointer;
-    border-radius: 10px;
-    transition: background 0.3s ease;
-    position: relative;
-    z-index: 2; /* Ensure it stays centred */
+    transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+/* Start Button - Hover Animation (Scale Effect) */
+#start:hover {
+    transform: scale(1.05); /* Slightly enlarges the button */
+    transition: transform 0.2s ease-in-out;
 }
 
 /* Skip Button - Uses Image */

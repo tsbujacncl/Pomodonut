@@ -1,3 +1,8 @@
+// Sound Effects
+const playSound = new Audio("assets/sounds/play.mp3");
+const pauseSound = new Audio("assets/sounds/pause.mp3");
+const alarmSound = new Audio("assets/sounds/alarm.mp3");
+
 // Timer State Variables
 let timer;
 let timeLeft;
@@ -99,18 +104,25 @@ function updateTimerImage() {
     }
 }
 
-// Start/Pause Timer
 function toggleTimer() {
     if (isRunning) {
         clearInterval(timer);
         isRunning = false;
         startButton.textContent = "Start";
+
+        // Play Pause Sound
+        pauseSound.currentTime = 0; // Reset sound position
+        pauseSound.play();
     } else {
         let totalTime = isBreakMode ? getBreakTime() : getPomodoroTime();
         let endTime = Date.now() + timeLeft;
 
         isRunning = true;
         startButton.textContent = "Pause";
+
+        // Play Start Sound
+        playSound.currentTime = 0;
+        playSound.play();
 
         // Smooth animation: refresh every 10ms instead of 1000ms
         timer = setInterval(() => {
@@ -123,6 +135,11 @@ function toggleTimer() {
                 clearInterval(timer);
                 isRunning = false;
                 startButton.textContent = "Start";
+
+                // Play Alarm Sound for 2 Seconds
+                alarmSound.currentTime = 0;
+                alarmSound.play();
+                setTimeout(() => alarmSound.pause(), 1850); // Stop after 1.7 seconds
 
                 if (isBreakMode) {
                     pomodorosLeft--;
