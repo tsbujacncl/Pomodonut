@@ -6,6 +6,7 @@
     <title>🍩 Pomodonut Timer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="assets/donut.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -22,7 +23,7 @@
 
         <!-- Donut Timer -->
         <div class="donut-timer">
-            <svg class="donut-svg" width="700" height="700">
+            <svg class="donut-svg" viewBox="0 0 700 700">
                 <defs>
                     <pattern id="donut-pattern" patternUnits="userSpaceOnUse" width="700" height="700">
                         <image id="timer-image" href="assets/donut.png" width="700" height="700"></image>
@@ -60,12 +61,12 @@
                 <fieldset>
                     <legend>Timer Length</legend>
                     <label>Pomodoro: 
-                        <input type="number" id="pomodoro-minutes" value="25" min="0"> min
-                        <input type="number" id="pomodoro-seconds" value="0" min="0" max="59"> sec
+                        <input type="number" id="pomodoro-minutes" value="25" min="0" placeholder="min"> min
+                        <input type="number" id="pomodoro-seconds" value="0" min="0" max="59" placeholder="sec"> sec
                     </label>
                     <label>Break: 
-                        <input type="number" id="break-minutes" value="5" min="0"> min
-                        <input type="number" id="break-seconds" value="0" min="0" max="59"> sec
+                        <input type="number" id="break-minutes" value="5" min="0" placeholder="min"> min
+                        <input type="number" id="break-seconds" value="0" min="0" max="59" placeholder="sec"> sec
                     </label>
                 </fieldset>
 
