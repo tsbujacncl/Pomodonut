@@ -36,6 +36,12 @@
                         transform="rotate(0 350 350)">
                 </circle>
             </svg>
+            
+            <!-- Separate coffee mug image (not clipped by circle) -->
+            <img id="coffee-mug-image" src="assets/coffee-mug.png" alt="Coffee Mug" style="display: none;">
+            
+            <!-- Break progress rectangle -->
+            <div id="break-progress-bar" style="display: none;"></div>
         
             <!-- Timer Countdown Text -->
             <span id="timer-text">25:00</span>
@@ -60,13 +66,19 @@
                 <!-- Timer Length Inputs -->
                 <fieldset>
                     <legend>Timer Length</legend>
-                    <label>Pomodoro: 
-                        <input type="number" id="pomodoro-minutes" value="25" min="0" placeholder="min"> min
-                        <input type="number" id="pomodoro-seconds" value="0" min="0" max="59" placeholder="sec"> sec
+                    <label>
+                        <span class="label-text">Pomodoro:</span>
+                        <input type="number" id="pomodoro-minutes" value="25" min="0">
+                        <span class="unit-text">min</span>
+                        <input type="number" id="pomodoro-seconds" value="0" min="0" max="59">
+                        <span class="unit-text">sec</span>
                     </label>
-                    <label>Break: 
-                        <input type="number" id="break-minutes" value="5" min="0" placeholder="min"> min
-                        <input type="number" id="break-seconds" value="0" min="0" max="59" placeholder="sec"> sec
+                    <label>
+                        <span class="label-text">Break:</span>
+                        <input type="number" id="break-minutes" value="5" min="0">
+                        <span class="unit-text">min</span>
+                        <input type="number" id="break-seconds" value="0" min="0" max="59">
+                        <span class="unit-text">sec</span>
                     </label>
                 </fieldset>
 

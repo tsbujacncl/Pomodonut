@@ -16,6 +16,9 @@ const startButton = document.getElementById("start");
 const skipButton = document.getElementById("skip");
 const donutCircle = document.querySelector(".donut-svg circle");
 const timerImage = document.getElementById("timer-image");
+const coffeeMugImage = document.getElementById("coffee-mug-image");
+const donutSvg = document.querySelector(".donut-svg");
+const breakProgressBar = document.getElementById("break-progress-bar");
 
 // Mode Switch Buttons
 const pomodoroButton = document.getElementById("pomodoro-mode");
@@ -86,18 +89,35 @@ function updateTimerDisplay(time) {
     
     timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     
-    // Update circular wipe animation
-    let totalTime = isBreakMode ? getBreakTime() : getPomodoroTime();
-    let progress = time / totalTime; // Calculate progress (1 → 0)
-    donutCircle.style.strokeDashoffset = circumference * progress;
+    // Only update circular wipe animation if not in break mode (when SVG is visible)
+    if (!isBreakMode) {
+        let totalTime = getPomodoroTime();
+        let progress = time / totalTime; // Calculate progress (1 → 0)
+        donutCircle.style.strokeDashoffset = circumference * progress;
+    } else {
+        // Update break progress bar height based on remaining time
+        let totalTime = getBreakTime();
+        let progress = time / totalTime; // Calculate progress (1 → 0)
+        let maxHeight = 354; // Maximum height in pixels
+        let heightPixels = Math.max(0, progress * maxHeight); // Convert to pixels
+        breakProgressBar.style.height = `${heightPixels}px`;
+    }
 }
 
 // Update Timer Image Based on Mode
 function updateTimerImage() {
     if (isBreakMode) {
-        timerImage.setAttribute("href", "assets/coffee-mug.png");
-        donutCircle.style.stroke = "none";
+        // Hide the circular SVG and show separate coffee mug image and progress bar
+        donutSvg.style.display = "none";
+        coffeeMugImage.style.display = "block";
+        breakProgressBar.style.display = "block";
+        // Initialize progress bar to full height
+        breakProgressBar.style.height = "354px";
     } else {
+        // Show the circular SVG and hide coffee mug image and progress bar
+        donutSvg.style.display = "block";
+        coffeeMugImage.style.display = "none";
+        breakProgressBar.style.display = "none";
         timerImage.setAttribute("href", "assets/donut.png");
         donutCircle.style.stroke = "#f8e5c0";
         donutCircle.style.strokeDashoffset = circumference;
@@ -167,19 +187,37 @@ function skipToNextMode() {
 
 // Switch to Pomodoro Mode
 function switchToPomodoro() {
+    console.log("Switching to Pomodoro mode");
+    clearInterval(timer);
+    isRunning = false;
+    startButton.textContent = "Start";
+    
     isBreakMode = false;
     timeLeft = getPomodoroTime();
     updateTimerDisplay(timeLeft);
     updateTimerImage();
+    
+    document.body.classList.remove("break-mode");
+    document.querySelector(".container").classList.remove("break-mode");
+    
     if (autoStartPomodoros.checked) toggleTimer();
 }
 
 // Switch to Break Mode
 function switchToBreak() {
+    console.log("Switching to Break mode");
+    clearInterval(timer);
+    isRunning = false;
+    startButton.textContent = "Start";
+    
     isBreakMode = true;
     timeLeft = getBreakTime();
     updateTimerDisplay(timeLeft);
     updateTimerImage();
+    
+    document.body.classList.add("break-mode");
+    document.querySelector(".container").classList.add("break-mode");
+    
     if (autoStartBreaks.checked) toggleTimer();
 }
 
@@ -224,29 +262,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSettings();
     switchToPomodoro();
 });
-
-// Switch to Break Mode
-function switchToBreak() {
-    isBreakMode = true;
-    timeLeft = getBreakTime();
-    updateTimerDisplay(timeLeft);
-    updateTimerImage();
-    
-    document.body.classList.add("break-mode"); // Apply light blue to background
-    document.querySelector(".container").classList.add("break-mode"); // Apply lighter blue to container
-
-    if (autoStartBreaks.checked) toggleTimer();
-}
-
-// Switch to Pomodoro Mode
-function switchToPomodoro() {
-    isBreakMode = false;
-    timeLeft = getPomodoroTime();
-    updateTimerDisplay(timeLeft);
-    updateTimerImage();
-
-    document.body.classList.remove("break-mode"); // Revert background
-    document.querySelector(".container").classList.remove("break-mode"); // Revert container
-
-    if (autoStartPomodoros.checked) toggleTimer();
-}

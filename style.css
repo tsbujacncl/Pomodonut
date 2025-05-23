@@ -72,6 +72,41 @@ h1 {
     stroke: #f8e5c0;
 }
 
+/* Timer Image */
+#timer-image {
+    /* No special styling needed */
+}
+
+/*Make coffee mug 50% larger and move it left and down
+#timer-image.coffee-mug {
+    transform: scale(3.0) translate(0px, 0px);
+} */
+
+/* Separate coffee mug image styling */
+#coffee-mug-image {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    transform: translate(calc(-50% + 40px), calc(-50% - 0px)) rotate(270deg);
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Break progress bar styling */
+#break-progress-bar {
+    position: absolute;
+    width: 262.2px;
+    height: 250px;
+    background-color: rgb(170, 124, 91); /* Very light brown */
+    bottom: calc(50% - 194px);
+    left: calc(50% + 0.6px);
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: none;
+}
+
 /* Timer Text */
 #timer-text {
     position: absolute;
@@ -80,7 +115,7 @@ h1 {
     font-weight: 500;
     color: #4a3426;
     z-index: 3;
-    text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.12);
     letter-spacing: -0.02em;
 }
 
@@ -196,7 +231,6 @@ h1 {
     height: 100%;
     background: rgba(248, 229, 192, 0.95);
     backdrop-filter: blur(20px);
-    display: flex;
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.3s ease-in-out;
@@ -411,44 +445,31 @@ h1 {
     gap: 6px;
 }
 
-/* Timer Length Labels - Single Line Layout */
+/* Timer Length Labels - Clean Simple Layout */
+fieldset:first-of-type {
+    display: block;
+}
+
 fieldset:first-of-type label {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    gap: 8px;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-}
-
-/* Ensure all timer elements fit on one line */
-fieldset:first-of-type label {
-    width: 100%;
-    justify-content: flex-start;
-}
-
-/* Set fixed width for label text for proper alignment */
-fieldset:first-of-type label:first-of-type::before {
-    content: "Pomodoro:";
-    min-width: 85px;
-    display: inline-block;
-}
-
-fieldset:first-of-type label:last-of-type::before {
-    content: "Break:";
-    min-width: 85px;
-    display: inline-block;
-}
-
-/* Hide original label text and show pseudo content */
-fieldset:first-of-type label {
-    font-size: 0;
-}
-
-fieldset:first-of-type label::before {
-    font-size: 13px;
+    margin-bottom: 10px;
+    gap: 6px;
     font-family: 'Fredoka', cursive;
     font-weight: 500;
+    color: #4a3426;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+.label-text {
+    display: inline-block;
+    min-width: 85px;
+    text-align: left;
+}
+
+.unit-text {
+    font-size: 13px;
     color: #4a3426;
 }
 
