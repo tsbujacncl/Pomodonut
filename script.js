@@ -19,6 +19,7 @@ const timerImage = document.getElementById("timer-image");
 const coffeeMugImage = document.getElementById("coffee-mug-image");
 const donutSvg = document.querySelector(".donut-svg");
 const breakProgressBar = document.getElementById("break-progress-bar");
+const steamGif = document.getElementById("steam-gif");
 
 // Mode Switch Buttons
 const pomodoroButton = document.getElementById("pomodoro-mode");
@@ -111,6 +112,7 @@ function updateTimerImage() {
         donutSvg.style.display = "none";
         coffeeMugImage.style.display = "block";
         breakProgressBar.style.display = "block";
+        steamGif.style.display = "block";
         // Initialize progress bar to full height
         breakProgressBar.style.height = "354px";
     } else {
@@ -118,6 +120,7 @@ function updateTimerImage() {
         donutSvg.style.display = "block";
         coffeeMugImage.style.display = "none";
         breakProgressBar.style.display = "none";
+        steamGif.style.display = "none";
         timerImage.setAttribute("href", "assets/donut.png");
         donutCircle.style.stroke = "#f8e5c0";
         donutCircle.style.strokeDashoffset = circumference;
