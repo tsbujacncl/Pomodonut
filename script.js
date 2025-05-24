@@ -84,24 +84,48 @@ function getBreakTime() {
 }
 
 // Update Timer Display
-function updateTimerDisplay(time) {
-    let minutes = Math.floor(time / 60000);
-    let seconds = Math.floor((time % 60000) / 1000);
+function updateTimerDisplay(displayTime, animationTime = displayTime) {
+    let minutes = Math.floor(displayTime / 60000);
+    let seconds = Math.floor((displayTime % 60000) / 1000);
+    let timeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    let modeLabel = isBreakMode ? "Coffee Break" : "Donut Time";
     
-    timerText.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    // Update the center timer display (just time)
+    timerText.textContent = timeString;
     
-    // Only update circular wipe animation if not in break mode (when SVG is visible)
+    // Update the browser tab title with time and mode
+    document.title = `${timeString} - ${modeLabel}`;
+    
+    // Use animation time for progress calculations so animations start immediately
     if (!isBreakMode) {
         let totalTime = getPomodoroTime();
-        let progress = time / totalTime; // Calculate progress (1 → 0)
+        let progress = animationTime / totalTime; // Calculate progress (1 → 0)
         donutCircle.style.strokeDashoffset = circumference * progress;
     } else {
         // Update break progress bar height based on remaining time
         let totalTime = getBreakTime();
-        let progress = time / totalTime; // Calculate progress (1 → 0)
+        let progress = animationTime / totalTime; // Calculate progress (1 → 0)
         let maxHeight = 354; // Maximum height in pixels
         let heightPixels = Math.max(0, progress * maxHeight); // Convert to pixels
         breakProgressBar.style.height = `${heightPixels}px`;
+        
+        // Update steam opacity based on remaining time (fade from 0.9-0.8 to 0.2 at the end)
+        if (steamGif.style.display !== "none") {
+            let maxStartOpacity = 0.9; // Starting max opacity
+            let minStartOpacity = 0.8; // Starting min opacity
+            let endOpacity = 0.2; // Ending opacity
+            
+            // Calculate current max and min opacities based on progress
+            let currentMaxOpacity = endOpacity + (progress * (maxStartOpacity - endOpacity));
+            let currentMinOpacity = endOpacity + (progress * (minStartOpacity - endOpacity));
+            
+            // Update CSS custom properties to control the animation opacity range
+            document.documentElement.style.setProperty('--steam-max-opacity', currentMaxOpacity);
+            document.documentElement.style.setProperty('--steam-min-opacity', currentMinOpacity);
+            
+            // Apply the current max opacity directly to the element
+            steamGif.style.opacity = currentMaxOpacity;
+        }
     }
 }
 
@@ -113,6 +137,10 @@ function updateTimerImage() {
         coffeeMugImage.style.display = "block";
         breakProgressBar.style.display = "block";
         steamGif.style.display = "block";
+        // Reset steam opacity to initial values when starting break
+        steamGif.style.opacity = 0.9;
+        document.documentElement.style.setProperty('--steam-max-opacity', 0.9);
+        document.documentElement.style.setProperty('--steam-min-opacity', 0.8);
         // Initialize progress bar to full height
         breakProgressBar.style.height = "354px";
     } else {
@@ -138,7 +166,6 @@ function toggleTimer() {
         pauseSound.play();
     } else {
         let totalTime = isBreakMode ? getBreakTime() : getPomodoroTime();
-        let endTime = Date.now() + timeLeft;
 
         isRunning = true;
         startButton.textContent = "Pause";
@@ -147,14 +174,37 @@ function toggleTimer() {
         playSound.currentTime = 0;
         playSound.play();
 
-        // Smooth animation: refresh every 10ms instead of 1000ms
+        // Start animations immediately, but delay countdown display by 1 second
+        let startTime = Date.now();
+        let realEndTime = startTime + timeLeft; // Real timer for animations
+        let originalTimeLeft = timeLeft; // Store original time for display
+
         timer = setInterval(() => {
             let now = Date.now();
-            timeLeft = Math.max(0, endTime - now); // Prevent negative values
+            let realTimeLeft = Math.max(0, realEndTime - now); // For animations
+            let elapsedTime = now - startTime;
+            
+            // Display time: show original time for first 1000ms, then countdown from that point
+            let displayTimeLeft;
+            if (elapsedTime < 1000) {
+                displayTimeLeft = originalTimeLeft; // Stay on original time for first second
+            } else {
+                // After first second, countdown from original time minus elapsed time since the delay
+                displayTimeLeft = Math.max(0, originalTimeLeft - (elapsedTime - 1000));
+            }
+            
+            // Stop display at 0:01, but keep animations running
+            if (displayTimeLeft <= 1000) {
+                displayTimeLeft = 1000; // Lock display at 0:01
+            }
+            
+            timeLeft = displayTimeLeft;
 
-            updateTimerDisplay(timeLeft);
+            // Use real time for animations, display time for text
+            updateTimerDisplay(displayTimeLeft, realTimeLeft);
 
-            if (timeLeft <= 0) {
+            // Finish when animations are complete (real time reaches 0)
+            if (realTimeLeft <= 0) {
                 clearInterval(timer);
                 isRunning = false;
                 startButton.textContent = "Start";
@@ -164,12 +214,13 @@ function toggleTimer() {
                 alarmSound.play();
                 setTimeout(() => alarmSound.pause(), 1850); // Stop after 1.7 seconds
 
+                // Automatically switch to next mode
                 if (isBreakMode) {
                     pomodorosLeft--;
                     pomodorosLeftInput.value = pomodorosLeft;
-                    if (autoStartPomodoros.checked) switchToPomodoro();
+                    switchToPomodoro();
                 } else {
-                    if (autoStartBreaks.checked) switchToBreak();
+                    switchToBreak();
                 }
             }
         }, 10);
