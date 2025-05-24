@@ -555,8 +555,8 @@ body.break-mode #settings-button {
     
     #break-progress-bar {
         width: 176.2px;
-        height: 10px;
-        bottom: calc(50% - 154px);
+        height: 220px;
+        bottom: calc(50% - 144px);
         left: 50%;
         transform: translateX(calc(-50% - 7px));
     }
