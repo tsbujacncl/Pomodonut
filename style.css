@@ -243,6 +243,10 @@ h1 {
     backdrop-filter: blur(10px);
 }
 
+body.break-mode #settings-button {
+    right: 20px; /* Ensure it stays at the right side in break mode */
+}
+
 #settings-button img {
     display: block;
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
@@ -514,11 +518,11 @@ h1 {
     }
     
     #break-progress-bar {
-        width: 185px;
-        height: 120px;
-        bottom: calc(50% - 150px);
+        width: 167px; /* 10% narrower than 185px */
+        height: 100px; /* Reduced by 20px from 120px */
+        bottom: calc(50% - 162px); /* Moved down by 12px from -150px */
         left: 50%;
-        transform: translateX(calc(-50% + 1px));
+        transform: translateX(calc(-50% - 7px)); /* Moved 8px more to the left */
     }
 
     #timer-text {
