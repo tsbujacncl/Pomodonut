@@ -525,9 +525,9 @@ body.break-mode #settings-button {
     }
     
     #break-progress-bar {
-        width: 177px; /* Increased by 3px (2px left, 1px right) */
-        height: 80px;
-        bottom: calc(50% - 304px); /* Moved down by 140px from -164px */
+        width: 176.2px; /* Reduced by 0.8px from 177px */
+        height: 40px; /* Reduced by 50% from 80px */
+        bottom: calc(50% - 304px);
         left: 50%;
         transform: translateX(calc(-50% - 7px));
     }
