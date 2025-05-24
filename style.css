@@ -389,7 +389,7 @@ h1 {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .container {
-        padding: 10px 10px 10px 10px;
+        padding: 10px 10px 20px 10px;
     }
     
     h1 {
@@ -404,17 +404,18 @@ h1 {
     }
     
     .donut-timer {
-        width: 75vw;
-        height: 75vw;
-        max-width: 450px;
-        max-height: 450px;
-        min-width: 250px;
-        min-height: 250px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 460px;
+        max-height: 460px;
+        min-width: 260px;
+        min-height: 260px;
         margin-top: 10px;
+        margin-bottom: 25px;
     }
     
     #timer-text {
-        font-size: clamp(1rem, 5.3vh, 2.6rem);
+        font-size: clamp(1.3rem, 6.9vh, 3.4rem);
     }
     
     #skip {
@@ -438,8 +439,8 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 320px;
-        height: 320px;
+        width: 350px;
+        height: 350px;
         transform: translate(calc(-50% + 12px), calc(-50% + 15px)) rotate(270deg);
     }
 
@@ -461,28 +462,29 @@ h1 {
     }
 
     #break-progress-bar {
-        width: 110px;
-        height: 115px;
-        bottom: calc(50% - 75px);
+        width: 140px;
+        height: 145px;
+        bottom: calc(50% - 85px);
         left: 50%;
         transform: translateX(calc(-50% + 5px));
     }
 
     .controls {
-        margin-top: 10px;
+        margin-top: 20px;
         gap: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .donut-timer {
-        width: 85vw;
-        height: 85vw;
-        max-width: 350px;
-        max-height: 350px;
-        min-width: 220px;
-        min-height: 220px;
+        width: 90vw;
+        height: 90vw;
+        max-width: 380px;
+        max-height: 380px;
+        min-width: 240px;
+        min-height: 240px;
         margin-top: 5px;
+        margin-bottom: 30px;
     }
     
     #skip {
@@ -490,14 +492,14 @@ h1 {
     }
     
     .controls {
-        margin-top: 5px;
+        margin-top: 15px;
         gap: 10px;
     }
 
     #coffee-mug-image {
-        width: 280px;
-        height: 280px;
-        transform: translate(calc(-50% + 8px), calc(-50% + 12px)) rotate(270deg);
+        width: 320px;
+        height: 320px;
+        transform: translate(calc(-50% + 8px), calc(-50% + 15px)) rotate(270deg);
     }
 
     #steam-gif {
@@ -507,20 +509,20 @@ h1 {
     }
     
     #break-progress-bar {
-        width: 100px;
-        height: 100px;
-        bottom: calc(50% - 65px);
+        width: 120px;
+        height: 130px;
+        bottom: calc(50% - 75px);
         left: 50%;
-        transform: translateX(calc(-50% + 3px));
+        transform: translateX(calc(-50% + 4px));
     }
 
     #timer-text {
-        font-size: clamp(0.9rem, 4.8vh, 2.2rem);
+        font-size: clamp(1.17rem, 6.2vh, 2.86rem);
     }
 
     .mode-switch {
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
         gap: 20px;
     }
 
