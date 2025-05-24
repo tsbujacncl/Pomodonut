@@ -36,6 +36,7 @@ body.break-mode {
     background-color: #f8e5c0; /* Same peach color */
     max-width: 100%;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /* Title Styles */
@@ -199,6 +200,11 @@ h1 {
     padding: 8px;
     border-radius: 50%;
     transition: all 0.3s ease;
+    display: block; /* Ensure it's always visible */
+}
+
+body.break-mode #skip {
+    display: block; /* Explicitly ensure it's visible in break mode */
 }
 
 #skip img {
@@ -492,11 +498,15 @@ body.break-mode #settings-button {
 }
 
 @media (max-width: 480px) {
-    html, body {
+    html, body, 
+    body.break-mode,
+    body.break-mode html {
         height: 100%;
         overflow: hidden;
         position: fixed;
         width: 100%;
+        -webkit-overflow-scrolling: none;
+        touch-action: none;
     }
     
     .container {
@@ -542,9 +552,9 @@ body.break-mode #settings-button {
     }
 
     #coffee-mug-image {
-        width: 670px;
-        height: 670px;
-        transform: translate(calc(-50% + 19px), calc(-50% + 34px)) rotate(270deg);
+        width: 620px; /* Reduced by 50px from 670px */
+        height: 620px; /* Reduced by 50px from 670px */
+        transform: translate(calc(-50% - 31px), calc(-50% + 34px)) rotate(270deg); /* Moved left by 50px from +19px to -31px */
     }
 
     #steam-gif {
@@ -554,15 +564,15 @@ body.break-mode #settings-button {
     }
     
     #break-progress-bar {
-        width: 176.2px;
-        height: 220px; /* Made taller to compensate for rotation */
+        height: 176.2px; /* Swapped with width to account for rotation */
+        width: 220px; /* Swapped with height to account for rotation */
         position: absolute;
         top: auto;
         bottom: auto;
         left: auto;
         right: auto;
-        /* Completely reposition the bar to match the mug */
-        transform: translate(calc(-50% + 105px), calc(-50% - 15px)) rotate(270deg);
+        /* Adjusted position to match the mug's new position */
+        transform: translate(calc(-50% + 55px), calc(-50% - 15px)) rotate(270deg); /* Moved left by 50px from +105px to +55px */
         top: 50%;
         left: 50%;
     }
@@ -606,6 +616,11 @@ body.break-mode #settings-button {
             opacity: var(--steam-min-opacity);
             transform: translate(calc(-50% - 16px), calc(-50% - 170px)) scale(1.05);
         }
+    }
+
+    body.break-mode #skip {
+        display: block;
+        right: -55px;
     }
 }
 
