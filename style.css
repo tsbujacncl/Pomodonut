@@ -497,27 +497,27 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 320px;
-        height: 320px;
-        transform: translate(calc(-50% + 8px), calc(-50% + 15px)) rotate(270deg);
+        width: 360px;
+        height: 360px;
+        transform: translate(calc(-50% + 10px), calc(-50% + 18px)) rotate(270deg);
     }
 
     #steam-gif {
-        width: 150px;
-        height: 150px;
-        transform: translate(calc(-50% - 8px), calc(-50% - 140px));
+        width: 160px;
+        height: 160px;
+        transform: translate(calc(-50% - 8px), calc(-50% - 150px));
     }
     
     #break-progress-bar {
-        width: 120px;
-        height: 130px;
-        bottom: calc(50% - 75px);
+        width: 160px;
+        height: 110px;
+        bottom: calc(50% - 60px);
         left: 50%;
         transform: translateX(calc(-50% + 4px));
     }
 
     #timer-text {
-        font-size: clamp(1.17rem, 6.2vh, 2.86rem);
+        font-size: clamp(1.29rem, 6.8vh, 3.15rem);
     }
 
     .mode-switch {
@@ -525,15 +525,26 @@ h1 {
         margin-bottom: 15px;
         gap: 20px;
     }
+    
+    .mode-switch button {
+        font-size: 16.5px;
+        padding: 13px 18px;
+        width: 149px;
+    }
+    
+    #start {
+        font-size: 16.5px;
+        padding: 13px 24px;
+    }
 
     @keyframes steamBreathing {
         0%, 100% { 
             opacity: var(--steam-max-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 140px)) scale(1);
+            transform: translate(calc(-50% - 8px), calc(-50% - 150px)) scale(1);
         }
         50% { 
             opacity: var(--steam-min-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 140px)) scale(1.05);
+            transform: translate(calc(-50% - 8px), calc(-50% - 150px)) scale(1.05);
         }
     }
 }
