@@ -555,10 +555,16 @@ body.break-mode #settings-button {
     
     #break-progress-bar {
         width: 176.2px;
-        height: 120px;
-        bottom: calc(50% - 124px);
+        height: 220px; /* Made taller to compensate for rotation */
+        position: absolute;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        /* Completely reposition the bar to match the mug */
+        transform: translate(calc(-50% + 105px), calc(-50% - 15px)) rotate(270deg);
+        top: 50%;
         left: 50%;
-        transform: translateX(calc(-50% - 7px));
     }
 
     body.break-mode .container,
