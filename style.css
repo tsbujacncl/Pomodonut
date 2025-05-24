@@ -502,9 +502,9 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 720px;
-        height: 720px;
-        transform: translate(calc(-50% + 20px), calc(-50% + 36px)) rotate(270deg);
+        width: 670px;
+        height: 670px;
+        transform: translate(calc(-50% + 19px), calc(-50% + 34px)) rotate(270deg);
     }
 
     #steam-gif {
@@ -514,9 +514,9 @@ h1 {
     }
     
     #break-progress-bar {
-        width: 320px;
+        width: 225px;
         height: 220px;
-        bottom: calc(50% - 120px);
+        bottom: calc(50% - 140px);
         left: 50%;
         transform: translateX(calc(-50% + 8px));
     }
