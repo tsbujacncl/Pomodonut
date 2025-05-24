@@ -241,10 +241,15 @@ h1 {
     border-radius: 50%;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    width: 48px; /* Set explicit width */
+    height: 48px; /* Set explicit height */
+    box-sizing: content-box;
 }
 
 body.break-mode #settings-button {
-    right: 20px; /* Ensure it stays at the right side in break mode */
+    right: 20px;
+    width: 48px; /* Maintain same width in break mode */
+    height: 48px;
 }
 
 #settings-button img {
@@ -518,11 +523,11 @@ body.break-mode #settings-button {
     }
     
     #break-progress-bar {
-        width: 167px; /* 10% narrower than 185px */
-        height: 100px; /* Reduced by 20px from 120px */
-        bottom: calc(50% - 162px); /* Moved down by 12px from -150px */
+        width: 174px; /* Increased by total of 7px from 167px */
+        height: 80px; /* Further reduced to accommodate large reduction request */
+        bottom: calc(50% - 164px); /* Moved down by 2px from -162px */
         left: 50%;
-        transform: translateX(calc(-50% - 7px)); /* Moved 8px more to the left */
+        transform: translateX(calc(-50% - 7px));
     }
 
     #timer-text {
