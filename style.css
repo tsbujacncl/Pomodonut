@@ -404,10 +404,10 @@ h1 {
     }
     
     .donut-timer {
-        width: 65vw;
-        height: 65vw;
-        max-width: 380px;
-        max-height: 380px;
+        width: 70vw;
+        height: 70vw;
+        max-width: 400px;
+        max-height: 400px;
         min-width: 250px;
         min-height: 250px;
     }
@@ -469,10 +469,10 @@ h1 {
 
 @media (max-width: 480px) {
     .donut-timer {
-        width: 75vw;
-        height: 75vw;
-        max-width: 300px;
-        max-height: 300px;
+        width: 85vw;
+        height: 85vw;
+        max-width: 340px;
+        max-height: 340px;
     }
     
     #skip {
