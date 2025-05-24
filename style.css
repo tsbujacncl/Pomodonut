@@ -29,6 +29,8 @@ body {
 /* Break Mode Background */
 body.break-mode {
     background-color: #f8e5c0; /* Same peach color */
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Title Styles */
@@ -523,11 +525,20 @@ body.break-mode #settings-button {
     }
     
     #break-progress-bar {
-        width: 174px; /* Increased by total of 7px from 167px */
-        height: 80px; /* Further reduced to accommodate large reduction request */
-        bottom: calc(50% - 164px); /* Moved down by 2px from -162px */
+        width: 177px; /* Increased by 3px (2px left, 1px right) */
+        height: 80px;
+        bottom: calc(50% - 304px); /* Moved down by 140px from -164px */
         left: 50%;
         transform: translateX(calc(-50% - 7px));
+    }
+
+    body.break-mode .container,
+    body.break-mode .donut-timer,
+    body.break-mode .controls,
+    body.break-mode .mode-switch {
+        max-width: 100%;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     #timer-text {
