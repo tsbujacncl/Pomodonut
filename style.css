@@ -514,11 +514,11 @@ h1 {
     }
     
     #break-progress-bar {
-        width: 225px;
-        height: 220px;
-        bottom: calc(50% - 140px);
+        width: 185px;
+        height: 120px;
+        bottom: calc(50% - 150px);
         left: 50%;
-        transform: translateX(calc(-50% + 8px));
+        transform: translateX(calc(-50% + 1px));
     }
 
     #timer-text {
