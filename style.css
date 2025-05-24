@@ -406,14 +406,14 @@ h1 {
     .donut-timer {
         width: 70vw;
         height: 70vw;
-        max-width: 400px;
-        max-height: 400px;
+        max-width: 450px;
+        max-height: 450px;
         min-width: 250px;
         min-height: 250px;
     }
     
     #timer-text-container {
-        font-size: clamp(1.6rem, 8.5vw, 3.2rem);
+        font-size: clamp(1.4rem, 7.5vw, 2.8rem);
     }
     
     #skip {
@@ -437,33 +437,34 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 200px;
-        height: 200px;
-        transform: translate(calc(-50% + 20px), calc(-50% + 10px)) rotate(270deg);
+        width: 220px;
+        height: 220px;
+        transform: translate(calc(-50% + 10px), calc(-50% + 20px)) rotate(270deg);
     }
 
     #steam-gif {
-        width: 150px;
-        height: 150px;
-        transform: translate(calc(-50% - 5px), calc(-50% - 130px));
+        width: 160px;
+        height: 160px;
+        transform: translate(calc(-50% - 8px), calc(-50% - 145px));
     }
 
     @keyframes steamBreathing {
         0%, 100% { 
             opacity: var(--steam-max-opacity);
-            transform: translate(calc(-50% - 5px), calc(-50% - 130px)) scale(1);
+            transform: translate(calc(-50% - 8px), calc(-50% - 145px)) scale(1);
         }
         50% { 
             opacity: var(--steam-min-opacity);
-            transform: translate(calc(-50% - 5px), calc(-50% - 130px)) scale(1.05);
+            transform: translate(calc(-50% - 8px), calc(-50% - 145px)) scale(1.05);
         }
     }
 
     #break-progress-bar {
-        width: 115px;
-        height: 110px;
-        bottom: calc(50% - 80px);
-        left: calc(50% + 0.3px);
+        width: 100px;
+        height: 90px;
+        bottom: calc(50% - 60px);
+        left: 50%;
+        transform: translateX(calc(-50% + 10px));
     }
 }
 
@@ -471,8 +472,8 @@ h1 {
     .donut-timer {
         width: 85vw;
         height: 85vw;
-        max-width: 340px;
-        max-height: 340px;
+        max-width: 360px;
+        max-height: 360px;
     }
     
     #skip {
@@ -484,21 +485,23 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 180px;
-        height: 180px;
-        transform: translate(calc(-50% + 15px), calc(-50% + 5px)) rotate(270deg);
+        width: 200px;
+        height: 200px;
+        transform: translate(calc(-50% + 5px), calc(-50% + 15px)) rotate(270deg);
     }
 
     #steam-gif {
-        width: 130px;
-        height: 130px;
-        transform: translate(calc(-50% - 2px), calc(-50% - 115px));
+        width: 140px;
+        height: 140px;
+        transform: translate(calc(-50% - 5px), calc(-50% - 130px));
     }
     
     #break-progress-bar {
-        width: 100px;
-        height: 95px;
-        bottom: calc(50% - 70px);
+        width: 90px;
+        height: 80px;
+        bottom: calc(50% - 50px);
+        left: 50%;
+        transform: translateX(calc(-50% + 5px));
     }
 }
 
