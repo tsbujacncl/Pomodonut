@@ -414,7 +414,7 @@ h1 {
     }
     
     #timer-text-container {
-        font-size: clamp(0.84rem, 4.5vw, 1.7rem);
+        font-size: clamp(0.56rem, 3vw, 1.12rem);
     }
     
     #skip {
@@ -438,32 +438,32 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 220px;
-        height: 220px;
-        transform: translate(calc(-50% + 10px), calc(-50% + 20px)) rotate(270deg);
+        width: 280px;
+        height: 280px;
+        transform: translate(calc(-50% + 10px), calc(-50% + 15px)) rotate(270deg);
     }
 
     #steam-gif {
-        width: 160px;
-        height: 160px;
-        transform: translate(calc(-50% - 8px), calc(-50% - 145px));
+        width: 200px;
+        height: 200px;
+        transform: translate(calc(-50% - 10px), calc(-50% - 180px));
     }
 
     @keyframes steamBreathing {
         0%, 100% { 
             opacity: var(--steam-max-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 145px)) scale(1);
+            transform: translate(calc(-50% - 10px), calc(-50% - 180px)) scale(1);
         }
         50% { 
             opacity: var(--steam-min-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 145px)) scale(1.05);
+            transform: translate(calc(-50% - 10px), calc(-50% - 180px)) scale(1.05);
         }
     }
 
     #break-progress-bar {
-        width: 100px;
-        height: 90px;
-        bottom: calc(50% - 60px);
+        width: 130px;
+        height: 120px;
+        bottom: calc(50% - 70px);
         left: 50%;
         transform: translateX(calc(-50% + 10px));
     }
@@ -493,27 +493,27 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 200px;
-        height: 200px;
-        transform: translate(calc(-50% + 5px), calc(-50% + 15px)) rotate(270deg);
+        width: 250px;
+        height: 250px;
+        transform: translate(calc(-50% + 5px), calc(-50% + 10px)) rotate(270deg);
     }
 
     #steam-gif {
-        width: 140px;
-        height: 140px;
-        transform: translate(calc(-50% - 5px), calc(-50% - 130px));
+        width: 180px;
+        height: 180px;
+        transform: translate(calc(-50% - 8px), calc(-50% - 160px));
     }
     
     #break-progress-bar {
-        width: 90px;
-        height: 80px;
-        bottom: calc(50% - 50px);
+        width: 110px;
+        height: 100px;
+        bottom: calc(50% - 60px);
         left: 50%;
         transform: translateX(calc(-50% + 5px));
     }
 
     #timer-text-container {
-        font-size: clamp(0.8rem, 4vw, 1.5rem);
+        font-size: clamp(0.5rem, 2.8vw, 1rem);
     }
 
     .mode-switch {
