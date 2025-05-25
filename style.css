@@ -85,9 +85,9 @@ h1 {
 /* Separate coffee mug image styling */
 #coffee-mug-image {
     position: absolute;
-    width: 350px;
-    height: 350px;
-    transform: translate(calc(-50% + 40px), calc(-50% + 7px)) rotate(270deg);
+    width: 1000px; /* Reduced by 5% from 1050px */
+    height: 1000px; /* Reduced by 5% from 1050px */
+    transform: translate(calc(-50% + 40px), calc(-50% + 4px)) rotate(270deg); /* Moved up 10px (14px -> 4px) */
     top: 50%;
     left: 50%;
     z-index: 1;
@@ -97,9 +97,9 @@ h1 {
 /* Steam GIF styling */
 #steam-gif {
     position: absolute;
-    width: 230px;
-    height: 230px;
-    transform: translate(calc(-50% - 13px), calc(-50% - 220px));
+    width: 276px; /* Reduced by 20% from 345px */
+    height: 276px; /* Reduced by 20% from 345px */
+    transform: translate(calc(-50% - 13px), calc(-50% - 250px)); /* Adjusted Y position for smaller size */
     top: 50%;
     left: 50%;
     z-index: -1;
@@ -116,25 +116,27 @@ h1 {
 @keyframes steamBreathing {
     0%, 100% { 
         opacity: var(--steam-max-opacity);
-        transform: translate(calc(-50% - 13px), calc(-50% - 220px)) scale(1);
+        transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1);
     }
     50% { 
         opacity: var(--steam-min-opacity);
-        transform: translate(calc(-50% - 13px), calc(-50% - 220px)) scale(1.05);
+        transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1.05);
     }
 }
 
 /* Break progress bar styling */
 #break-progress-bar {
     position: absolute;
-    width: 130px;
-    height: 125px;
+    width: 262.5px;
+    height: 250px;
     background-color: rgb(170, 124, 91); /* Very light brown */
-    bottom: calc(50% - 100px);
-    left: calc(50% + 0.6px);
+    bottom: calc(50% - 198px);
+    left: calc(50% + 0.3px);
     transform: translateX(-50%);
     z-index: 2;
     pointer-events: none;
+    opacity: 1; /* Make progress bar visible */
+    visibility: visible; /* Ensure it's visible */
 }
 
 /* Timer Text */
@@ -439,34 +441,34 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 350px;
-        height: 350px;
-        transform: translate(calc(-50% + 12px), calc(-50% + 15px)) rotate(270deg);
+        width: 1000px; /* Same as desktop */
+        height: 1000px; /* Same as desktop */
+        transform: translate(calc(-50% + 40px), calc(-50% + 4px)) rotate(270deg); /* Same as desktop */
     }
 
     #steam-gif {
-        width: 180px;
-        height: 180px;
-        transform: translate(calc(-50% - 10px), calc(-50% - 170px));
+        width: 276px; /* Same as desktop */
+        height: 276px; /* Same as desktop */
+        transform: translate(calc(-50% - 13px), calc(-50% - 250px)); /* Same as desktop */
     }
 
     @keyframes steamBreathing {
         0%, 100% { 
             opacity: var(--steam-max-opacity);
-            transform: translate(calc(-50% - 10px), calc(-50% - 170px)) scale(1);
+            transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1);
         }
         50% { 
             opacity: var(--steam-min-opacity);
-            transform: translate(calc(-50% - 10px), calc(-50% - 170px)) scale(1.05);
+            transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1.05);
         }
     }
 
     #break-progress-bar {
-        width: 140px;
-        height: 145px;
-        bottom: calc(50% - 85px);
-        left: 50%;
-        transform: translateX(calc(-50% + 5px));
+        width: 262.5px; /* Same as desktop */
+        height: 250px; /* Same as desktop */
+        bottom: calc(50% - 198px); /* Same as desktop */
+        left: calc(50% + 0.3px); /* Same as desktop */
+        transform: translateX(-50%); /* Same as desktop */
     }
 
     .controls {
@@ -497,23 +499,23 @@ h1 {
     }
 
     #coffee-mug-image {
-        width: 320px;
-        height: 320px;
-        transform: translate(calc(-50% + 8px), calc(-50% + 15px)) rotate(270deg);
+        width: 1000px; /* Same as desktop */
+        height: 1000px; /* Same as desktop */
+        transform: translate(calc(-50% + 40px), calc(-50% + 4px)) rotate(270deg); /* Same as desktop */
     }
 
     #steam-gif {
-        width: 150px;
-        height: 150px;
-        transform: translate(calc(-50% - 8px), calc(-50% - 140px));
+        width: 276px; /* Same as desktop */
+        height: 276px; /* Same as desktop */
+        transform: translate(calc(-50% - 13px), calc(-50% - 250px)); /* Same as desktop */
     }
     
     #break-progress-bar {
-        width: 120px;
-        height: 130px;
-        bottom: calc(50% - 75px);
-        left: 50%;
-        transform: translateX(calc(-50% + 4px));
+        width: 262.5px; /* Same as desktop */
+        height: 250px; /* Same as desktop */
+        bottom: calc(50% - 198px); /* Same as desktop */
+        left: calc(50% + 0.3px); /* Same as desktop */
+        transform: translateX(-50%); /* Same as desktop */
     }
 
     #timer-text {
@@ -529,11 +531,11 @@ h1 {
     @keyframes steamBreathing {
         0%, 100% { 
             opacity: var(--steam-max-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 140px)) scale(1);
+            transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1);
         }
         50% { 
             opacity: var(--steam-min-opacity);
-            transform: translate(calc(-50% - 8px), calc(-50% - 140px)) scale(1.05);
+            transform: translate(calc(-50% - 13px), calc(-50% - 250px)) scale(1.05);
         }
     }
 }
